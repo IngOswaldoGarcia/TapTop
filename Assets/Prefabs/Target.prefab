@@ -156,6 +156,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   incremento: 2
-  verticalDirection: -15
+  verticalDirection: -6
   horizontalDirection: 0
   screenSize: 0

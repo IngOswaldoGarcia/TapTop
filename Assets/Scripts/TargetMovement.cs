@@ -10,7 +10,7 @@ public class TargetMovement : MonoBehaviour
     public float verticalDirection;
     public float horizontalDirection;
     private Rigidbody2D rb2d;
-    private float desplazamiento = 0.001f;
+    private float desplazamiento = 0.01f;
     public float screenSize;
     
     bool clickChecker;
