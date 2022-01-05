@@ -741,16 +741,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 5307279439671787251, guid: 9a1dd4ff2c23bb44183444fc433a5370, type: 3}
   spawnValues: {x: 2.2, y: 8, z: 0}
+  jsonFile: {fileID: 4900000, guid: 32be9d740cb0dfb41a23a05c8f258545, type: 3}
   spawnWait: 0.15
   startWait: 1
   waveWait: 0
   screenSize: 0
   counter: 0
-  completeTimesList:
-    target_times:
-    - 1f
-    - 2f
-    - 3f
 --- !u!4 &1699781831
 Transform:
   m_ObjectHideFlags: 0
