@@ -9,6 +9,7 @@ public class GameController : MonoBehaviour
 {
     public GameObject target;
     public Vector3 spawnValues;
+    public TextAsset jsonFile;
 /*     public int targetsCount; */
     public float spawnWait;
     public float startWait;
@@ -24,23 +25,25 @@ public class GameController : MonoBehaviour
 
 
 /*     string info = JsonUtility.FromJson<GameController>(textAsset.text); */
-        
-    [System.Serializable]
+    
+    void Awake()
+    {
+        string json = File.ReadAllText(Application.dataPath + "/Scripts/Json/times_game_01.json");
+        Target_times targetsInJson = JsonUtility.FromJson<Target_times>(jsonFile.text);
+ 
+        foreach (Target target in targetsInJson.targeet)
+        {
+            Debug.Log("Found employee: " + target.time);
+        }
 
-    public class TimesList {
-        public string[] target_times;
+        Debug.Log(json);
     }
-
-    public TimesList completeTimesList = new TimesList();
 
     void Start()
     {
         StartCoroutine(SpawnWaves());
         screenSize = ((float)Screen.width / (float)110);
-/*         string json = File.ReadAllText(Application.dataPath + "/Scripts/Json/times_game_01.json");
-        string data = JsonSerializer.Deserialize<IList<GameController>>(json); */
-/*         TimesList data = JsonUtility.FromJson<TimesList>(json); */
-/*         Debug.Log(data[0]); */
+
     }
 
     // Update is called once per frame
@@ -54,7 +57,6 @@ public class GameController : MonoBehaviour
         SoundSystem.instance.PlayMusic();
         /* Trigger enterTrigger = JsonUtils.ImportJson<Trigger>("Json/enter"); */
         for (int j = 0; j < targetBehaviour.Length; j++){
-/*             Debug.Log(waveWaitArray[j]); */
             for (int i = 0; i < targetBehaviour[j, 0]; i++){
                 float random_direction = Random.Range(-1, 2);
                 target.GetComponent<TargetMovement>().horizontalDirection = 0;
@@ -69,28 +71,21 @@ public class GameController : MonoBehaviour
         }
     }
 
-        
-/*         while (true) {
-            for (int i = 0; i < targetsCount; i++)
-            { */
-/*                 float random_velocity = Random.Range(1, 10); */
-/*                 float random_direction = Random.Range(-1, 2);
-                target.GetComponent<TargetMovement>().incremento = 5;
-                target.GetComponent<TargetMovement>().horizontalDirection = random_direction; */
-/*                 if(i == 2){
-                    target.GetComponent<TargetMovement>().incremento = 2f;
-                }else if(i == 6){
-                    target.GetComponent<TargetMovement>().incremento = 6f;Esta
-                }else if(i == 10){
-                    target.GetComponent<TargetMovement>().incremento = 10f;
-                }else if(i == 15){
-                    target.GetComponent<TargetMovement>().incremento = 2f;
-                } */
-                
-/*                 Vector3 spawnPosition = new Vector3(Random.Range(-screenSize, screenSize), spawnValues.y, spawnValues.z);
-                Instantiate(target, spawnPosition, Quaternion.identity);
-                yield return new WaitForSeconds(spawnWait);
-            } */
+    [System.Serializable]
+    public class Target
+    {
+        //these variables are case sensitive and must match the strings "firstName" and "lastName" in the JSON.
+        public int time;
+    }
+
+    [System.Serializable]
+    public class Target_times
+    {
+        //these variables are case sensitive and must match the strings "firstName" and "lastName" in the JSON.
+        public Target[] targeet;
+    }
+
+    
             
 }
 
