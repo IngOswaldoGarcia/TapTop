@@ -28,15 +28,6 @@ public class GameController : MonoBehaviour
     
     void Awake()
     {
-        string json = File.ReadAllText(Application.dataPath + "/Scripts/Json/times_game_01.json");
-        Target_times targetsInJson = JsonUtility.FromJson<Target_times>(jsonFile.text);
- 
-        foreach (Target target in targetsInJson.targeet)
-        {
-            Debug.Log("Found employee: " + target.time);
-        }
-
-        Debug.Log(json);
     }
 
     void Start()
@@ -69,20 +60,6 @@ public class GameController : MonoBehaviour
             }
             yield return new WaitForSeconds(targetBehaviour[j,1]);
         }
-    }
-
-    [System.Serializable]
-    public class Target
-    {
-        //these variables are case sensitive and must match the strings "firstName" and "lastName" in the JSON.
-        public int time;
-    }
-
-    [System.Serializable]
-    public class Target_times
-    {
-        //these variables are case sensitive and must match the strings "firstName" and "lastName" in the JSON.
-        public Target[] targeet;
     }
 
     
