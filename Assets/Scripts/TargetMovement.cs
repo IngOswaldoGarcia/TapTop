@@ -10,17 +10,17 @@ public class TargetMovement : MonoBehaviour
     public float verticalDirection;
     public float horizontalDirection;
     private Rigidbody2D rb2d;
-    private float desplazamiento = 0.01f;
+    private float desplazamiento = 0.001f;
     public float screenSize;
+
     
     bool clickChecker;
     bool activeTouch;
-    
+
 
     private void Awake()
     {
         rb2d = GetComponent<Rigidbody2D>();
-
     }
 
     // Use this for initialization
@@ -40,14 +40,18 @@ public class TargetMovement : MonoBehaviour
         if(rb2d.transform.position.x > screenSize || rb2d.transform.position.x < ( -1 * screenSize)){
             horizontalDirection = -1 * horizontalDirection;
         }
-
     }
 
 
     void OnTriggerEnter2D(Collider2D other) {
         if (other.CompareTag("Clicker")) {            
             activeTouch = true;
+            if(GameController.instance.activeMusic == false){
+
+                GameController.instance.activeMusic = true;
+            }
         } 
+
     }
 
     void OnMouseDown(){

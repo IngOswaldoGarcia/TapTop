@@ -7,7 +7,7 @@ public class SoundSystem : MonoBehaviour
 
     public static SoundSystem instance;
 
-    public AudioClip music;
+    public AudioClip[] music = new AudioClip[10];
     public AudioSource audioSource;
 
     private void Awake() {
@@ -30,7 +30,7 @@ public class SoundSystem : MonoBehaviour
     }
 
     public void PlayMusic(){
-        audioSource.clip = music;
+        audioSource.clip = music[0];
         audioSource.Play();
     }
 
