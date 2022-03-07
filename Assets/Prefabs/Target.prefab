@@ -155,7 +155,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a2b138f3b8c24b41940d23981bbbf66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  incremento: 2
-  verticalDirection: -6
   horizontalDirection: 0
   screenSize: 0
+  verticalDirection: -10

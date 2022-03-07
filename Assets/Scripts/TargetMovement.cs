@@ -6,21 +6,21 @@ public class TargetMovement : MonoBehaviour
 {
 
     [Header("Movimieto De Target")]
-    public float incremento = 1f;
-    public float verticalDirection;
     public float horizontalDirection;
     private Rigidbody2D rb2d;
     private float desplazamiento = 0.001f;
     public float screenSize;
+    public float verticalDirection;
 
-    
     bool clickChecker;
     bool activeTouch;
 
-
+    private Animator anim;
+    
     private void Awake()
     {
         rb2d = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
     }
 
     // Use this for initialization
@@ -34,8 +34,8 @@ public class TargetMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        rb2d.transform.Translate(Vector2.up * (verticalDirection * (desplazamiento * incremento)));
-        rb2d.transform.Translate(Vector2.right * (horizontalDirection * (desplazamiento * incremento)));
+        rb2d.transform.Translate(Vector2.up * (verticalDirection * (desplazamiento  * 2)));
+        rb2d.transform.Translate(Vector2.right * (horizontalDirection * (desplazamiento  * 2)));
 
         if(rb2d.transform.position.x > screenSize || rb2d.transform.position.x < ( -1 * screenSize)){
             horizontalDirection = -1 * horizontalDirection;
@@ -46,10 +46,9 @@ public class TargetMovement : MonoBehaviour
     void OnTriggerEnter2D(Collider2D other) {
         if (other.CompareTag("Clicker")) {            
             activeTouch = true;
-            if(GameController.instance.activeMusic == false){
-
-                GameController.instance.activeMusic = true;
-            }
+            clickChecker = true;
+            verticalDirection = 0;
+            anim.SetTrigger("Clicked");
         } 
 
     }
@@ -57,8 +56,10 @@ public class TargetMovement : MonoBehaviour
     void OnMouseDown(){
         if(activeTouch){
             Debug.Log("Click");
-            activeTouch = false;
+/*             Destroy(this.gameObject); */
             clickChecker = true;
+            anim.SetTrigger("Clicked");
+            
         }
     }
 
