@@ -34,14 +34,13 @@ public class TargetMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        rb2d.transform.Translate(Vector2.up * (verticalDirection * (desplazamiento  * 2)));
+        rb2d.transform.Translate(Vector2.down * (verticalDirection * (desplazamiento  * 2)));
         rb2d.transform.Translate(Vector2.right * (horizontalDirection * (desplazamiento  * 2)));
 
         if(rb2d.transform.position.x > screenSize || rb2d.transform.position.x < ( -1 * screenSize)){
             horizontalDirection = -1 * horizontalDirection;
         }
     }
-
 
     void OnTriggerEnter2D(Collider2D other) {
         if (other.CompareTag("Clicker")) {            
