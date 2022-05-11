@@ -45,9 +45,6 @@ public class TargetMovement : MonoBehaviour
     void OnTriggerEnter2D(Collider2D other) {
         if (other.CompareTag("Clicker")) {            
             activeTouch = true;
-            clickChecker = true;
-            verticalDirection = 0;
-            anim.SetTrigger("Clicked");
         } 
 
     }
@@ -56,20 +53,21 @@ public class TargetMovement : MonoBehaviour
         if(activeTouch){
             Debug.Log("Click");
 /*             Destroy(this.gameObject); */
+            verticalDirection = 0;
             clickChecker = true;
+            activeTouch = false;
             anim.SetTrigger("Clicked");
-            
+            GameController.instance.UpdateScore();
         }
     }
 
     void OnTriggerExit2D(Collider2D other) {
         if (other.CompareTag("Clicker")) {
             activeTouch = false;
-/*             if(clickChecker){
-                Debug.Log("Salio clickeado");
-            }else{
-                Debug.Log("No salio clickeado");
-            }  */
+            Debug.Log("Salida" + clickChecker);
+          if(!clickChecker){
+                GameController.instance.SetLoserMessage();
+            }
         }
     } 
 }

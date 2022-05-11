@@ -4,6 +4,7 @@ using System.IO;
 using Newtonsoft.Json;
 using UnityEngine;
 using UnityEngine.IO;
+using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
 {
@@ -28,6 +29,11 @@ public class GameController : MonoBehaviour
     public bool activeMusic;
 
     public float velocity = 5.0f;
+
+    public Text textScore;
+    public Text loserMessage;
+
+    int scorePoints = 0;
 
     ConstantsBehavior constants = new ConstantsBehavior();
 
@@ -87,5 +93,13 @@ public class GameController : MonoBehaviour
             }
             yield return new WaitForSeconds(constants.TARGET_BEHAVIOR[j, 1]);
         }
+    }
+
+    public void UpdateScore() {
+        textScore.text = "Score: " + ++scorePoints; 
+    }
+
+    public void SetLoserMessage() {
+        loserMessage.gameObject.SetActive(true);
     }
 }
