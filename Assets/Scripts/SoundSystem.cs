@@ -34,6 +34,10 @@ public class SoundSystem : MonoBehaviour
         audioSource.Play();
     }
 
+    public void StopMusic(){
+        audioSource.Stop();
+    }
+
     private void OnDestroy() {
         if(SoundSystem.instance == this){
             SoundSystem.instance = null;

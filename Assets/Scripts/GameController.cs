@@ -10,6 +10,8 @@ public class GameController : MonoBehaviour
 {
     public static GameController instance;
 
+    public GameObject[] respawns;
+
     public GameObject target;
 
     public GameObject startButton;
@@ -101,5 +103,11 @@ public class GameController : MonoBehaviour
 
     public void SetLoserMessage() {
         loserMessage.gameObject.SetActive(true);
+        SoundSystem.instance.StopMusic();
+        respawns = GameObject.FindGameObjectsWithTag("Target");
+        foreach (GameObject respawn in respawns)
+        {
+            Destroy(respawn);
+        }
     }
 }
