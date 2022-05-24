@@ -51,8 +51,6 @@ public class TargetMovement : MonoBehaviour
 
     void OnMouseDown(){
         if(activeTouch){
-            Debug.Log("Click");
-/*             Destroy(this.gameObject); */
             verticalDirection = 0;
             clickChecker = true;
             activeTouch = false;
@@ -64,9 +62,8 @@ public class TargetMovement : MonoBehaviour
     void OnTriggerExit2D(Collider2D other) {
         if (other.CompareTag("Clicker")) {
             activeTouch = false;
-            Debug.Log("Salida" + clickChecker);
           if(!clickChecker){
-                GameController.instance.SetLoserMessage();
+                GameController.instance.SetEndMessage();
             }
         }
     } 

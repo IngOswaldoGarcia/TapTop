@@ -1095,6 +1095,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2cc0329b9a99d924c8a3aee3f1dd52c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  respawns: []
   target: {fileID: 5696813605377855591, guid: 9a1dd4ff2c23bb44183444fc433a5370, type: 3}
   startButton: {fileID: 88421171}
   spawnValues: {x: 2.2, y: 8, z: 0}
@@ -1104,7 +1105,7 @@ MonoBehaviour:
   screenSize: 0
   counter: 0
   activeMusic: 0
-  velocity: 80
+  velocity: 10
   textScore: {fileID: 1968061787}
   loserMessage: {fileID: 402290674}
 --- !u!4 &1699781831

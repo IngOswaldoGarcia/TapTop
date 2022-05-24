@@ -11,25 +11,17 @@ public class GameController : MonoBehaviour
     public static GameController instance;
 
     public GameObject[] respawns;
-
     public GameObject target;
-
     public GameObject startButton;
 
     public Vector3 spawnValues;
-
     public TextAsset jsonFile;
 
     public float spawnWait;
-
     public float waveWait;
-
     public float screenSize;
-
     public float counter = 0;
-
     public bool activeMusic;
-
     public float velocity = 5.0f;
 
     public Text textScore;
@@ -37,6 +29,7 @@ public class GameController : MonoBehaviour
 
     int scorePoints = 0;
 
+    Coroutine targetMovementCoroutine;
     ConstantsBehavior constants = new ConstantsBehavior();
 
     /*     string info = JsonUtility.FromJson<GameController>(textAsset.text); */
@@ -54,38 +47,33 @@ public class GameController : MonoBehaviour
 
     void Start()
     {
-        /*         StartCoroutine(SpawnWaves()); */
         screenSize = ((float) Screen.width / (float) 110);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
     }
 
     public void StartGame()
     {
-        StartCoroutine(SpawnWaves());
+        DeleteSpareTargets();
         SoundSystem.instance.PlayMusic();
+        targetMovementCoroutine = StartCoroutine(SpawnWaves());
+
         startButton.SetActive(false);
+        loserMessage.gameObject.SetActive(false);
+
+        scorePoints = 0;
+        textScore.text = "Score: " + scorePoints; 
     }
 
     IEnumerator SpawnWaves()
     {
         yield return new WaitForSeconds(constants.START_AWAIT);
 
-        /* Trigger enterTrigger = JsonUtils.ImportJson<Trigger>("Json/enter"); */
-        for (int j = 0; j < constants.TARGET_BEHAVIOR.Length; j++)
+        for (int j = 0; j < (constants.TARGET_BEHAVIOR.Length / 2); j++)
         {
             for (int i = 0; i < constants.TARGET_BEHAVIOR[j, 0]; i++)
             {
                 float random_direction = Random.Range(-1, 2);
                 target.GetComponent<TargetMovement>().horizontalDirection = 0;
-                 target.GetComponent<TargetMovement>().verticalDirection = velocity; 
-                if (j > 57)
-                {
-                    spawnWait = 0.0001f;
-                }
+                target.GetComponent<TargetMovement>().verticalDirection = velocity; 
                 Vector3 spawnPosition =
                     new Vector3(Random.Range(-screenSize, screenSize),
                         spawnValues.y,
@@ -101,13 +89,25 @@ public class GameController : MonoBehaviour
         textScore.text = "Score: " + ++scorePoints; 
     }
 
-    public void SetLoserMessage() {
+    public void SetEndMessage() {
+        StopCoroutine(targetMovementCoroutine);
         loserMessage.gameObject.SetActive(true);
         SoundSystem.instance.StopMusic();
+
+        startButton.SetActive(true);
         respawns = GameObject.FindGameObjectsWithTag("Target");
         foreach (GameObject respawn in respawns)
         {
-            Destroy(respawn);
+            respawn.GetComponent<Animator>().SetTrigger("Clicked");
+        }
+    }
+
+    public void DeleteSpareTargets() {
+        respawns = GameObject.FindGameObjectsWithTag("Target");
+        if (respawns.Length > 0) {
+            foreach (GameObject respawn in respawns){
+                Destroy(respawn);
+            }
         }
     }
 }
