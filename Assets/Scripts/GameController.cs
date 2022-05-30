@@ -11,6 +11,7 @@ public class GameController : MonoBehaviour
     public static GameController instance;
 
     public GameObject[] respawns;
+    public GameObject[] respawnsTargets;
     public GameObject target;
     public GameObject startButton;
 
@@ -95,15 +96,20 @@ public class GameController : MonoBehaviour
         SoundSystem.instance.StopMusic();
 
         startButton.SetActive(true);
-        respawns = GameObject.FindGameObjectsWithTag("Target");
+        respawns = GameObject.FindGameObjectsWithTag("TargetContainer");
+        respawnsTargets = GameObject.FindGameObjectsWithTag("Target");
         foreach (GameObject respawn in respawns)
         {
-            respawn.GetComponent<Animator>().SetTrigger("Clicked");
+            respawn.GetComponent<TargetMovement>().verticalDirection = 0;
+        }
+        foreach (GameObject respawnsTarget in respawnsTargets)
+        {
+            respawnsTarget.GetComponent<Animator>().SetTrigger("Clicked");
         }
     }
 
     public void DeleteSpareTargets() {
-        respawns = GameObject.FindGameObjectsWithTag("Target");
+        respawns = GameObject.FindGameObjectsWithTag("TargetContainer");
         if (respawns.Length > 0) {
             foreach (GameObject respawn in respawns){
                 Destroy(respawn);

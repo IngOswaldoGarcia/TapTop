@@ -220,7 +220,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_Size: {x: 15.2, y: 0.8}
+  m_Size: {x: 15.2, y: 1.8}
   m_Direction: 1
 --- !u!1 &88421171
 GameObject:
@@ -1096,7 +1096,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   respawns: []
-  target: {fileID: 5696813605377855591, guid: 9a1dd4ff2c23bb44183444fc433a5370, type: 3}
+  respawnsTargets: []
+  target: {fileID: 1358145296194841959, guid: c295fbed5a3559d4e96f4a3ab972f9d5, type: 3}
   startButton: {fileID: 88421171}
   spawnValues: {x: 2.2, y: 8, z: 0}
   jsonFile: {fileID: 4900000, guid: 32be9d740cb0dfb41a23a05c8f258545, type: 3}
@@ -1105,7 +1106,7 @@ MonoBehaviour:
   screenSize: 0
   counter: 0
   activeMusic: 0
-  velocity: 10
+  velocity: 5
   textScore: {fileID: 1968061787}
   loserMessage: {fileID: 402290674}
 --- !u!4 &1699781831
